@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using NxEmailService.DbContexts;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 

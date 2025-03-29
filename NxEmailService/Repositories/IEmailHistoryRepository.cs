@@ -1,6 +1,4 @@
-﻿using NxEmailService.Models;
-
-namespace NxEmailService.Repositories;
+﻿namespace NxEmailService.Repositories;
 
 public interface IEmailHistoryRepository 
 {

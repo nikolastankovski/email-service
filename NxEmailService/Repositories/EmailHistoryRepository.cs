@@ -1,8 +1,6 @@
 ﻿using NxEmailService.DbContexts;
-using NxEmailService.Models;
-using NxEmailService.Repositories;
 
-namespace LPMS.Infrastructure.Repositories;
+namespace NxEmailService.Repositories;
 
 public class EmailHistoryRepository : IEmailHistoryRepository
 {

@@ -1,0 +1,1 @@
+{"Timestamp":"2025-03-30T00:45:08.5894250+01:00","Level":"Error","MessageTemplate":"Exception: Email configuration not found!; Inner Exception: ","Exception":"System.Exception: Email configuration not found!","Properties":{"ApplicationName":"NxEmailService"}}

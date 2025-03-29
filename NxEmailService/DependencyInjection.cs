@@ -4,8 +4,6 @@ using FluentEmail.Razor;
 using System.Reflection;
 using NxEmailService.EmailService;
 using NxEmailService.Repositories;
-using LPMS.Infrastructure.Repositories;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 
 namespace NxEmailService
 {
