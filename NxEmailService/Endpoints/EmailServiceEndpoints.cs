@@ -1,4 +1,5 @@
 ﻿using FluentEmail.Core.Models;
+using NxEmailService.Templates;
 using NxEmailService.EmailService;
 using System.Globalization;
 

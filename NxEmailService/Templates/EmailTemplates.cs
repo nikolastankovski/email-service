@@ -1,4 +1,4 @@
-﻿namespace NxEmailService.EmailService;
+﻿namespace NxEmailService.Templates;
 
 public class EmailTemplates
 {
