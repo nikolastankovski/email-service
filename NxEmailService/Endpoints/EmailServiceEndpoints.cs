@@ -1,7 +1,5 @@
 ﻿using FluentEmail.Core.Models;
-using NxEmailService.Templates;
 using NxEmailService.EmailService;
-using System.Globalization;
 
 namespace NxEmailService.Endpoints
 {
@@ -11,15 +9,15 @@ namespace NxEmailService.Endpoints
         {
             var endpointGroup = endpoints.MapGroup("api/email-service");
 
-            endpointGroup.MapPost("/send-email", async (string templateName, object tokens, IMailClient _mailClient) =>
+            endpointGroup.MapPost("/send-email", async (string test, IMailClient _mailClient) =>
             {
                 var emailSetUp = new EmailSetUp()
                 {
                     To = new Address("stankovski.n@hotmail.com"),
                     From = new Address("nikola.stankovski98@gmail.com"),
-                    EmailTemplate = EmailTemplates.Account_ForgotPassword,
+                    EmailTemplate = "asd",
                     Subject = "Test mail",
-                    Culture = CultureInfo.GetCultureInfo("en-US"),
+                    LanguageTwoLetterIsoCode = "en",
                     Tokens = new { Name = "Nikola Stankovski" }
                 };
 

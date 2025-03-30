@@ -1,7 +1,9 @@
 ﻿using FluentEmail.Core;
+using FluentEmail.Core.Models;
 using NxEmailService.ExtensionMethods;
 using NxEmailService.Extensions;
 using NxEmailService.Repositories;
+using System.Globalization;
 
 namespace NxEmailService.EmailService;
 
@@ -24,9 +26,11 @@ public class MailClient : IMailClient
             _email.Subject(es.Subject);
 
             if (es.From is not null)
-                _email.SetFrom(es.From.EmailAddress, es.From.Name);
+                _email.SetFrom(es.From.EmailAddress, string.IsNullOrEmpty(es.From.Name) ? es.From.EmailAddress : es.From.Name);
 
             _email.To(es.To.EmailAddress);
+
+            var test = new Address("nikola");
 
             if (es.CC.Any())
                 _email.CC(es.CC);
@@ -34,12 +38,26 @@ public class MailClient : IMailClient
             if (es.BCC.Any())
                 _email.BCC(es.BCC);
 
-            _email.UsingCultureTemplateFromFile(es.EmailTemplate, es.Tokens, es.Culture);
+            if (es.Body is not null)
+                _email.Body(body: es.Body.Content, isHtml: es.Body.IsHTML);
 
             if (es.Attachments.Any())
                 _email.Attach(es.Attachments);
 
             emailHistory = _email.Data.ToEmailHistory(es.EmailTemplate);
+
+            var templatePath = Path.Combine(DirectoryPaths.EmailTemplatesPath, $"{es.EmailTemplate}.cshtml");
+
+            if(!string.IsNullOrEmpty(es.EmailTemplate) && !File.Exists(templatePath))
+            {
+                throw new Exception($"Template not found! Template: {es.EmailTemplate}");
+            }
+
+            if (File.Exists(templatePath))
+            {
+                var culture = string.IsNullOrEmpty(es.LanguageTwoLetterIsoCode) ? CultureInfo.InvariantCulture : CultureInfo.GetCultureInfo(es.LanguageTwoLetterIsoCode);
+                _email.UsingCultureTemplateFromFile(filename: templatePath, model: es.Tokens, culture: culture);
+            }
 
             var result = await _email.SendAsync();
 

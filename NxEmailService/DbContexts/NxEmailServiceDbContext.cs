@@ -45,7 +45,9 @@ public partial class NxEmailServiceDbContext : DbContext
                 .HasDefaultValueSql("(NOW() AT TIME ZONE 'UTC')");
             entity.Property(e => e.From).HasMaxLength(500);
             entity.Property(e => e.IsSent).HasDefaultValue(false);
-            entity.Property(e => e.Template).HasMaxLength(256);
+            entity.Property(e => e.Template).HasMaxLength(1000);
+            entity.Property(e => e.RelatedEntityName).HasMaxLength(1000);
+            entity.Property(e => e.RelatedEntityId).HasMaxLength(68);
         });
 
         OnModelCreatingPartial(modelBuilder);
