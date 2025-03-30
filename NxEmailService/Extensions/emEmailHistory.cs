@@ -8,7 +8,7 @@ namespace NxEmailService.ExtensionMethods
     {
         public static EmailHistory ToEmailHistory(this EmailData entity, string emailTemplate)
         {
-            var et = "\\EmailTemplates\\";
+            var et =  $"\\{nameof(NxEmailService.Templates)}\\";
             emailTemplate = emailTemplate.Substring(emailTemplate.IndexOf(et) + et.Length);
 
             var emailHistory = new EmailHistory()

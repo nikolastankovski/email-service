@@ -16,6 +16,7 @@ namespace NxEmailService.Endpoints
                 var emailSetUp = new EmailSetUp()
                 {
                     To = new Address("stankovski.n@hotmail.com"),
+                    From = new Address("nikola.stankovski98@gmail.com"),
                     EmailTemplate = EmailTemplates.Account_ForgotPassword,
                     Subject = "Test mail",
                     Culture = CultureInfo.GetCultureInfo("en-US"),

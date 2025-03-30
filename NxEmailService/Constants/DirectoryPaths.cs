@@ -4,6 +4,6 @@
     {
         public static readonly string BasePath = Environment.CurrentDirectory;
 
-        public static readonly string EmailTemplatesPath = Path.Combine(BasePath, "EmailTemplates");
+        public static readonly string EmailTemplatesPath = Path.Combine(BasePath, nameof(NxEmailService.Templates));
     }
 }
