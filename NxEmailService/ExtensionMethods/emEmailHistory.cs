@@ -6,7 +6,7 @@ namespace NxEmailService.ExtensionMethods
 {
     public static class emEmailHistory
     {
-        public static EmailHistory ToEmailHistory(this EmailData entity, string? emailTemplate)
+        public static EmailHistory ToEmailHistory(this EmailData entity, string? emailTemplate = null)
         {
             var emailHistory = new EmailHistory()
             {

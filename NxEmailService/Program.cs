@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NxEmailService.DbContexts;
+using NxEmailService.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,5 +31,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.RegisterEndpoints();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();

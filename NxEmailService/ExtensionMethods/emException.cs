@@ -1,4 +1,4 @@
-﻿namespace NxEmailService.Extensions;
+﻿namespace NxEmailService.ExtensionMethods;
 
 public static class emException
 {

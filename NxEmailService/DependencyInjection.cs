@@ -2,7 +2,6 @@
 using FluentEmail.MailKitSmtp;
 using FluentEmail.Razor;
 using System.Reflection;
-using NxEmailService.EmailService;
 using NxEmailService.Repositories;
 
 namespace NxEmailService
@@ -12,6 +11,7 @@ namespace NxEmailService
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IEmailHistoryRepository, EmailHistoryRepository>();
+            services.AddScoped<IEmailService, EmailService>();
 
             return services;
         }

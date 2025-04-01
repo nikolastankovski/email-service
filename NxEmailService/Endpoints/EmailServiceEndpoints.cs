@@ -1,7 +1,4 @@
-﻿using FluentEmail.Core.Models;
-using NxEmailService.EmailService;
-
-namespace NxEmailService.Endpoints
+﻿namespace NxEmailService.Endpoints
 {
     public static class EmailServiceEndpoints
     {
@@ -9,25 +6,31 @@ namespace NxEmailService.Endpoints
         {
             var endpointGroup = endpoints.MapGroup("api/email-service");
 
-            endpointGroup.MapPost("/send-email", async (string test, IMailClient _mailClient) =>
+            endpointGroup.MapPost("/send-email", async (SendEmailRequest request, IEmailService _emailService) =>
             {
-                var emailSetUp = new EmailSetUp()
-                {
-                    To = new Address("stankovski.n@hotmail.com"),
-                    From = new Address("nikola.stankovski98@gmail.com"),
-                    EmailTemplate = "asd",
-                    Subject = "Test mail",
-                    LanguageTwoLetterIsoCode = "en",
-                    Tokens = new { Name = "Nikola Stankovski" }
-                };
-
-                await _mailClient.SendEmailAsync(emailSetUp);
-
-                return Results.Ok("great");
+                var sendEmail = await _emailService.SendEmailAsync(request);
+                return sendEmail.IsSuccess ? sendEmail.ToNoContentResponse() : sendEmail.ToBadRequest();
             })
-            .Produces(statusCode: StatusCodes.Status200OK)
+            .Produces(statusCode: StatusCodes.Status204NoContent)
+            .Produces<BadRequestModel>(statusCode: StatusCodes.Status400BadRequest)
+            .Produces<InternalServerErrorModel>(statusCode: StatusCodes.Status500InternalServerError)
             .WithTags("email-service");
 
+            endpointGroup.MapPost("/health-check", async (string to, IEmailService _emailService) =>
+            {
+                var request = new SendEmailRequest()
+                {
+                    To = [to],
+                    Subject = "Health check",
+                };
+
+                var sendEmail = await _emailService.SendEmailAsync(request);
+                return sendEmail.IsSuccess ? sendEmail.ToNoContentResponse() : sendEmail.ToBadRequest();
+            })
+            .Produces(statusCode: StatusCodes.Status204NoContent)
+            .Produces<BadRequestModel>(statusCode: StatusCodes.Status400BadRequest)
+            .Produces<InternalServerErrorModel>(statusCode: StatusCodes.Status500InternalServerError)
+            .WithTags("email-service");
         }
     }
 }
