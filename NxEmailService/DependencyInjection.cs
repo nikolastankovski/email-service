@@ -11,6 +11,12 @@ namespace NxEmailService
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IEmailHistoryRepository, EmailHistoryRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterServices(this IServiceCollection services)
+        {
             services.AddScoped<IEmailService, EmailService>();
 
             return services;

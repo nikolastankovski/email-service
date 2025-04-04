@@ -12,7 +12,9 @@ builder.AddEmailService();
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 builder.Host.UseSerilog();
 
-builder.Services.RegisterRepositories();
+builder.Services
+    .RegisterRepositories()
+    .RegisterServices();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
