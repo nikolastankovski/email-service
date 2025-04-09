@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NxEmailService.DbEntities;
 using NxEmailService.Models;
 
 namespace NxEmailService.DbContexts;
@@ -32,7 +33,7 @@ public partial class NxEmailServiceDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("dbo");
+        modelBuilder.HasDefaultSchema("email");
 
         modelBuilder.Entity<EmailHistory>(entity =>
         {
@@ -48,6 +49,20 @@ public partial class NxEmailServiceDbContext : DbContext
             entity.Property(e => e.Template).HasMaxLength(1000);
             entity.Property(e => e.RelatedEntityName).HasMaxLength(1000);
             entity.Property(e => e.RelatedEntityId).HasMaxLength(68);
+        });
+
+        modelBuilder.Entity<EmailTemplate>(entity =>
+        {
+            entity.HasKey(e => e.EmailTemplateID).HasName("PK_EmailTemplate_EmailTemplateID");
+
+            entity.ToTable("EmailTemplate");
+
+            entity.Property(e => e.CreatedOnUTC)
+                .HasPrecision(3)
+                .HasDefaultValueSql("(NOW() AT TIME ZONE 'UTC')");
+            entity.Property(e => e.Name).HasMaxLength(500);
+            entity.Property(e => e.ValidFrom);
+            entity.Property(e => e.ValidTo);
         });
 
         OnModelCreatingPartial(modelBuilder);

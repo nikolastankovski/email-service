@@ -27,11 +27,4 @@ public partial class EmailHistory
 
     public DateTime CreatedOnUTC { get; set; }
 
-    /* public Guid CreatedBy { get; set; }
-
-     public DateTime CreatedOnUTC { get; set; }
-
-     public Guid? ModifiedBy { get; set; }
-
-     public DateTime? ModifiedOnUTC { get; set; }*/
 }

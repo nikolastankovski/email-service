@@ -7,8 +7,8 @@
         public List<string>? CC { get; set; }
         public List<string>? BCC { get; set; }
         public required string Subject { get; set; }
-        public EmailBody? Body { get; set; }
-        public EmailTemplate? Template { get; set; }
+        public Body? Body { get; set; }
+        public Template? Template { get; set; }
         public string? LanguageTwoLetterIsoCode { get; set; }
     }
 }

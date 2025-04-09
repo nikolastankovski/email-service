@@ -10,8 +10,8 @@ public class MailClientData
     public List<Address> CC { get; set; } = new List<Address>();
     public List<Address> BCC { get; set; } = new List<Address>();
     public string Subject { get; set; } = null!;
-    public EmailTemplate? Template { get; set; }
-    public EmailBody? Body { get; set; }
+    public Template? Template { get; set; }
+    public Body? Body { get; set; }
     public List<Attachment> Attachments { get; set; } = new List<Attachment>();
     public CultureInfo? Culture { get; set; }
 }
