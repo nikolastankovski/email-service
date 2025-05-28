@@ -35,5 +35,6 @@ app.UseHttpsRedirection();
 app.RegisterEndpoints();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<CorrelationIdMiddleware>();
 
 app.Run();
